@@ -12,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
        val toolbar=findViewById<Toolbar>(R.id.toolbar)
-       setSupportActionBar(toolbar)
+      // setSupportActionBar(toolbar)
+        toolbar?.inflateMenu(R.menu.toolbar)
        toolbar?.setOnMenuItemClickListener {
            item ->
            when (item.itemId) {
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
            true
        }
 
-        setContentView(R.layout.activity_main)
+
     }
 
 
