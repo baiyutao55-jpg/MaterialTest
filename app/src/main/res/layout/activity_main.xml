@@ -22,11 +22,11 @@
 
 </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF"
-        android:text="This is menu"
-        android:textSize="30sp"
-        android:layout_gravity="start"/>
+  <com.google.android.material.navigation.NavigationView
+      android:id="@+id/navView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:menu="@menu/nav_menu"
+      app:headerLayout="@layout/nav_header"/>
 </androidx.drawerlayout.widget.DrawerLayout>

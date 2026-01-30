@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         //setSupportActionBar(toolbar)
 
-
+        val navview=findViewById<NavigationView>(R.id.navView)
+        navview.setCheckedItem(R.id.navCall)
+        navview.setNavigationItemSelectedListener {
+            drawerLayout.closeDrawers()
+            true
+        }
 
         /*
         supportActionBar?.let {
