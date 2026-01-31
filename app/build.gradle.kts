@@ -41,6 +41,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(platform("de.hdodenhof:circleimageview:3.1.0" ))
     implementation("de.hdodenhof:circleimageview")
+
+    implementation(platform("com.github.bumptech.glide:glide:4.9.0"))
+    implementation("com.github.bumptech.glide:glide")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -2,16 +2,32 @@ package com.example.materialtest
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+
+
 
 
 class MainActivity : AppCompatActivity() {
+
+val fruits=mutableListOf(Fruit("Apple", R.drawable.apple), Fruit("Banana",
+    R.drawable.banana), Fruit("Orange", R.drawable.orange), Fruit("Watermelon",
+    R.drawable.watermelon), Fruit("Pear", R.drawable.pear), Fruit("Grape",
+    R.drawable.grape), Fruit("Pineapple", R.drawable.pineapple), Fruit("Strawberry",
+    R.drawable.strawberry), Fruit("Cherry", R.drawable.cherry), Fruit("Mango",
+    R.drawable.mango))
+
+   val fruitList= ArrayList<Fruit>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,8 +37,17 @@ class MainActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_menu)
 
         toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
-
+        val fab=findViewById<FloatingActionButton>(R.id.fab)
         //setSupportActionBar(toolbar)
+        fab.setOnClickListener {view ->
+            Snackbar.make(view,"Data deleted", Snackbar.LENGTH_SHORT)
+                .setAction("Undo"){
+                    Toast.makeText(this,"Data restored",Toast.LENGTH_SHORT).show()
+                }
+                .show()
+
+        }
+
 
         val navview=findViewById<NavigationView>(R.id.navView)
         navview.setCheckedItem(R.id.navCall)
@@ -70,10 +95,22 @@ class MainActivity : AppCompatActivity() {
            }
            true
        }
+        initFruits()
+        val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
 
+        val layoutManager= GridLayoutManager(this,2)
+        recyclerView.layoutManager=layoutManager
+        val adapter= FruitAdapter(this,fruitList)
+        recyclerView.adapter=adapter
 
     }
 
-
+    private fun initFruits(){
+        fruitList.clear()
+        repeat(50){
+            val index=(0 until fruits.size).random()
+            fruitList.add(fruits[index])
+        }
+    }
 
 }
