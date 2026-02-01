@@ -9,11 +9,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-
-
+import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +26,6 @@ val fruits=mutableListOf(Fruit("Apple", R.drawable.apple), Fruit("Banana",
     R.drawable.mango))
 
    val fruitList= ArrayList<Fruit>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +46,9 @@ val fruits=mutableListOf(Fruit("Apple", R.drawable.apple), Fruit("Banana",
                 .show()
 
         }
+
+
+
 
 
         val navview=findViewById<NavigationView>(R.id.navView)
@@ -103,6 +105,14 @@ val fruits=mutableListOf(Fruit("Apple", R.drawable.apple), Fruit("Banana",
         val adapter= FruitAdapter(this,fruitList)
         recyclerView.adapter=adapter
 
+        val swipeRefresh=findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
+
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary)
+        swipeRefresh.setOnRefreshListener {
+            refreshFruits(adapter)
+        }
+
+
     }
 
     private fun initFruits(){
@@ -110,6 +120,18 @@ val fruits=mutableListOf(Fruit("Apple", R.drawable.apple), Fruit("Banana",
         repeat(50){
             val index=(0 until fruits.size).random()
             fruitList.add(fruits[index])
+        }
+    }
+
+    private fun refreshFruits(adapter: FruitAdapter){
+        thread{
+            Thread.sleep(2000)
+            runOnUiThread {
+                initFruits()
+                adapter.notifyDataSetChanged()
+                val swipeRefresh=findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
+                swipeRefresh.isRefreshing=false
+            }
         }
     }
 

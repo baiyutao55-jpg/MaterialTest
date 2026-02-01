@@ -44,6 +44,9 @@ dependencies {
 
     implementation(platform("com.github.bumptech.glide:glide:4.9.0"))
     implementation("com.github.bumptech.glide:glide")
+
+    implementation(platform("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"))
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
