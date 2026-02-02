@@ -10,10 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".FruitActivity"
+            android:exported="false"
+            android:label="@string/title_activity_fruit"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme"
             android:exported="true"
-            android:label="Fruits">
+            android:label="Fruits"
+            android:theme="@style/FruitActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
